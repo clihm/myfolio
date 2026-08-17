@@ -679,3 +679,7 @@ h5 {
     top: 0;
   }
 }
+
+.project-caption h5 {
+  cursor: pointer;
+}
