@@ -342,39 +342,46 @@
           </p>
         </div>
 
-        <form class="contactForm" action="https://formspree.io/f/xxxxabcd" method="POST" data-aos="zoom-in" data-aos-duration="1000">
+        <form id="contactForm" class="contactForm" data-aos="zoom-in" data-aos-duration="1000">
           <div class="input-box">
-            <input type="text" name="name" placeholder="Name" required />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              required
-            />
+              <input type="text" name="name" placeholder="Name" required data-fs-field="name" />
+              <span data-fs-error="name" class="field-error"></span>
+      
+              <input
+                  type="email"
+                  name="email"
+                  placeholder="Email Address"
+                  required
+                  data-fs-field="email"
+              />
+              <span data-fs-error="email" class="field-error"></span>
           </div>
-
+      
           <textarea
-            name="message"
-            id=""
-            cols="30"
-            rows="10"
-            placeholder="Your Message"
-            required
+              name="message"
+              id=""
+              cols="30"
+              rows="10"
+              placeholder="Your Message"
+              required
+              data-fs-field="message"
           ></textarea>
+          <span data-fs-error="message" class="field-error"></span>
+      
           <div
-            class="contact-button"
-            data-aos="fade-zoom-in"
-            data-aos-easing="ease-in-out"
-            data-aos-delay="500"
-            data-aos-duration="1000"
+              class="contact-button"
+              data-aos="fade-zoom-in"
+              data-aos-easing="ease-in-out"
+              data-aos-delay="500"
+              data-aos-duration="1000"
           >
-            <button href="#!" class="btn btn-red" name="submit" type="submit">
-              Send Message
-            </button>
+              <button href="#!" class="btn btn-red" name="submit" type="submit" data-fs-submit-btn>
+                  Send Message
+              </button>
           </div>
-        </form>
-        <div class="response"></div>
-      </div>
+      </form>
+      <div class="response" data-fs-success data-fs-error></div>
+    </div>
     </section>
 
     <footer class="footer">
@@ -432,5 +439,7 @@
       referrerpolicy="no-referrer"
     ></script>
     <script type="module" src="js/main.js"></script>
+    <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+    <script src="./js/form.js" defer></script>
   </body>
 </html>
