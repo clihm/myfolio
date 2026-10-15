@@ -259,11 +259,13 @@ h5 {
   margin: 40px 0 40px;
   height: 24px;
 
-  img {
+img {
     height: 24px;
     width: 24px;
-  }
 }
+
+}
+
 
 .social-links-row a {
   filter: invert(35%) sepia(11%) saturate(160%) hue-rotate(145deg)
@@ -693,4 +695,18 @@ h5 {
 .response {
   margin-top: 16px;
   font-weight: 500;
+}
+
+.project-link {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.project-link:hover {
+  color: #023E8A; /* swap for your brand color */
+  text-decoration-thickness: 2px;
 }

@@ -1,43 +1,37 @@
-const form = () => {
-  const contactForm = document.querySelector(".contactForm"),
-    responseMessage = document.querySelector(".response");
+const contactForm = document.getElementById("contactForm");
+const responseMessage = document.getElementById("formResponse");
+const submitBtn = contactForm.querySelector("button[type='submit']");
 
-  contactForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
-    responseMessage.classList.add("open");
-    responseMessage.textContent = "Please wait...";
+contactForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-    async function getData() {
-      try {
-        const response = await fetch("mail.php", {
-          method: "POST",
-          body: formData,
-        });
-        if (!response.ok) {
-          responseMessage.textContent = result;
-        }
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Sending...";
+  responseMessage.classList.add("open");
+  responseMessage.textContent = "Please wait...";
 
-        const result = await response.text();
-        responseMessage.textContent = result;
-      } catch (error) {
-        console.error(error.message);
-      }
+  try {
+    const res = await fetch(contactForm.action, {
+      method: "POST",
+      body: new FormData(contactForm),
+      headers: { Accept: "application/json" },
+    });
+
+    if (res.ok) {
+      responseMessage.textContent = "Thanks! Your message has been sent.";
+      contactForm.reset();
+    } else {
+      responseMessage.textContent = "Something went wrong. Please try again.";
     }
+  } catch (error) {
+    console.error(error.message);
+    responseMessage.textContent = "Network error. Please check your connection and try again.";
+  }
 
-    getData()
-      .then(
-        setTimeout(() => {
-          responseMessage.classList.remove("open");
-        }, 3000)
-      )
-      .finally(form.reset());
-  });
-};
-export default form;
+  submitBtn.disabled = false;
+  submitBtn.textContent = "Send Message";
 
-window.formspree = window.formspree || function () {
-  (formspree.q = formspree.q || []).push(arguments);
-};
-formspree('initForm', { formElement: '#contactForm', formId: 'mppajgqe' });
+  setTimeout(() => {
+    responseMessage.classList.remove("open");
+  }, 4000);
+});
